@@ -1,0 +1,52 @@
+{
+  "name": "funpack",
+  "version": "0.0.0-dev",
+  "description": "Function Packager",
+  "main": "src/index.js",
+  "files": [
+    "dist/*"
+  ],
+  "bin": {
+    "funpack": "./cli/index"
+  },
+  "scripts": {
+    "precompile": "rimraf ./dist",
+    "compile": "tsc",
+    "test": "yarn jest --coverage && yarn lint && yarn prettier",
+    "fix": "yarn lint --fix && yarn prettier-fix",
+    "jest": "jest",
+    "lint": "eslint .",
+    "prettier": "prettier --check ./src",
+    "prettier-fix": "prettier --write ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doteric/funpack.git"
+  },
+  "keywords": [
+    "funpack",
+    "Function",
+    "Lambda",
+    "Packager"
+  ],
+  "author": "doteric",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/archiver": "^5.3.1",
+    "@types/jest": "^28.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
+    "jest": "^28.1.1",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^28.0.4",
+    "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "archiver": "^5.3.1",
+    "commander": "^9.3.0",
+    "esbuild": "^0.14.43",
+    "zod": "^3.17.3"
+  }
+}
