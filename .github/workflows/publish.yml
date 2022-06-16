@@ -1,0 +1,26 @@
+name: Publish Package to npmjs
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: |
+          git config --global user.name "doteric - Auto Publish"
+          git config --global user.email "npm_publish@doteric.net"
+          npm config set git-tag-version=false
+          npm version ${{ github.event.release.tag_name }}
+          npm install
+          npm run compile
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

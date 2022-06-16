@@ -1,0 +1,10 @@
+{
+  "funpack": {
+    "settings": {
+      "zip": true
+    },
+    "functions": {
+      "test": "./example/test.ts"
+    }
+  }
+}
