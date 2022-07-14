@@ -10,7 +10,7 @@
     "funpack": "dist/cli/index.js"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "scripts": {
     "precompile": "rimraf ./dist",
