@@ -51,9 +51,12 @@ For example you can use ESM with the following setup:
     "settings": {
       "esbuildConfigOverride": {
         "format": "esm",
-        ...TODO
+        "target": "node16"
       },
-      "packageFieldsToCopy": ["type"]
+      "packageFieldsToCopy": [
+        "type"
+      ],
+      "zip": true
     },
     "functions": {
       "main": "./src/main/index.ts"
