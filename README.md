@@ -4,7 +4,7 @@ Your **fun**ction **pack**ager (for example for AWS Lambdas).
 
 What this package does for you:
 
-- Bundles your code using [https://esbuild.github.io/](esbuild)
+- Bundles your code using [esbuild](https://esbuild.github.io/)
 - Generates proper package.json invidually for every function
 - ZIPs your functions
 
