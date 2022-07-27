@@ -42,7 +42,8 @@ const buildFunction = async (
   // Zip functions
   const shouldZip = packageObject.funpack.settings.zip;
   if (shouldZip) {
-    await zipDirectory(join(outputDir, name));
+    const shouldRemoveDir = packageObject.funpack.settings.removeDirAfterZip;
+    await zipDirectory(join(outputDir, name), shouldRemoveDir);
   }
 
   return buildResult;
