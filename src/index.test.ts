@@ -11,7 +11,9 @@ jest.mock('./utils/getPackageJsonObject', () =>
       settings: {
         outputDir: 'example/dist',
         packageFieldsToCopy: ['version', 'type'],
+        cleanupOutputDir: true,
         zip: true,
+        removeDirAfterZip: true,
       },
       functions: {
         testfunc: './example/test.ts',

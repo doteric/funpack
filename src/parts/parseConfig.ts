@@ -13,10 +13,12 @@ const configSchema = z.object(
       outputDir: z.string().default('dist'),
       // Fields from the root package.json to copy
       packageFieldsToCopy: z.array(z.string()).default([]),
-      // Whether to also zip the function
-      zip: z.boolean().default(false),
       // Remove the output directory before packaging
       cleanupOutputDir: z.boolean().default(true),
+      // Whether to also zip the function
+      zip: z.boolean().default(false),
+      // Remove directories of functions, leaving only the zip files
+      removeDirAfterZip: z.boolean().default(false),
     }),
   },
   { required_error: 'Missing funpack config inside package.json!' }
