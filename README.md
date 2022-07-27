@@ -64,3 +64,7 @@ For example you can use ESM with the following setup:
   }
 }
 ```
+
+## Recommendations
+
+When used together with TypeScript, [esbuild will not perform type checking](https://esbuild.github.io/content-types/#typescript), so it's recommended to run `tsc --noEmit` before using `funpack`.
