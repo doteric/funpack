@@ -65,6 +65,21 @@ For example you can use ESM with the following setup:
 }
 ```
 
+Example of using custom package.json values:
+
+```json
+{
+  "settings": {
+    "customPackageFields": {
+      "repository": {
+        "type": "git",
+        "url": "${YOUR_ENV_VARIABLE}"
+      }
+    }
+  }
+}
+```
+
 ## Recommendations
 
 When used together with TypeScript, [esbuild will not perform type checking](https://esbuild.github.io/content-types/#typescript), so it's recommended to run `tsc --noEmit` before using `funpack`.

@@ -15,10 +15,10 @@
   "scripts": {
     "precompile": "rimraf ./dist",
     "compile": "tsc",
-    "test": "yarn jest --coverage && yarn lint && yarn prettier",
-    "fix": "yarn lint --fix && yarn prettier-fix",
+    "test": "npm run jest --coverage && npm run lint && npm run prettier",
+    "fix": "npm run lint --fix && npm run prettier-fix",
     "jest": "jest",
-    "lint": "eslint .",
+    "lint": "eslint ./src",
     "prettier": "prettier --check ./src",
     "prettier-fix": "prettier --write ./src"
   },
