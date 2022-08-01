@@ -19,6 +19,8 @@ const configSchema = z.object(
       zip: z.boolean().default(false),
       // Remove directories of functions, leaving only the zip files
       removeDirAfterZip: z.boolean().default(false),
+      // Custom values to append to the packge.json
+      customPackageFields: z.record(z.string(), z.any()).default({}),
     }),
   },
   { required_error: 'Missing funpack config inside package.json!' }
