@@ -1,4 +1,4 @@
-type ValueType = string | object | number | any[] | null;
+type ValueType = string | object | number | ValueType[] | null;
 type ObjectType = Record<string, ValueType>;
 
 const isObject = (value: unknown): boolean => {
