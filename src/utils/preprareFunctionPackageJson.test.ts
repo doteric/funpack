@@ -17,7 +17,7 @@ describe('prepareFunctionPackageJson', () => {
     expect(packageObject).toEqual({
       dependencies: {
         commander: '9.3.0',
-        esbuild: '0.14.43',
+        esbuild: '0.15.13',
       },
       main: './index.js',
     });
