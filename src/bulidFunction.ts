@@ -17,12 +17,13 @@ const buildFunction = async (
   const esbuildConfig: BuildOptions =
     packageObject.funpack.settings.esbuildConfigOverride;
   const outputDir = packageObject.funpack.settings.outputDir;
-  const outputFilePath = join(outputDir, name, OUTPUT_FILE_NAME);
+  const functionOutputDir = join(outputDir, name);
 
   // Use esbuild to compile the function
   const buildResult = await useEsbuild(
     entrypoint,
-    outputFilePath,
+    functionOutputDir,
+    OUTPUT_FILE_NAME.replace('.js', ''),
     esbuildConfig
   );
 
@@ -32,6 +33,7 @@ const buildFunction = async (
     error('Missing metafile in esbuild result!');
     return false;
   }
+  const outputFilePath = join(outputDir, name, OUTPUT_FILE_NAME);
   generatePackageJson(
     metafile,
     packageObject,

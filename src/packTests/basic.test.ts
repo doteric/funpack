@@ -1,21 +1,20 @@
 import { join } from 'path';
 
-import funpack from './index';
+import funpack from '../index';
 
 process.env.GIT_REPO_URL = 'https://example.com/test/repo.git';
 
-jest.mock('./utils/getPackageJsonObject', () =>
+jest.mock('../utils/getPackageJsonObject', () =>
   jest.fn().mockReturnValue({
     name: 'my-lambdas',
     version: '0.0.0-dev',
-    type: 'module',
     funpack: {
       settings: {
         outputDir: 'example/dist',
         packageFieldsToCopy: ['version', 'type'],
         cleanupOutputDir: true,
         zip: true,
-        removeDirAfterZip: true,
+        //removeDirAfterZip: true,
         customPackageFields: {
           repository: {
             type: 'git',
@@ -39,13 +38,13 @@ describe('funpack', () => {
     expect(console.log).toBeCalledWith(
       join('example', 'dist', 'testfunc.zip'),
       '-',
-      20771,
+      21113,
       'total bytes'
     );
     expect(console.log).toBeCalledWith(
       join('example', 'dist', 'second.zip'),
       '-',
-      20768,
+      20815,
       'total bytes'
     );
   });

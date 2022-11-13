@@ -3,14 +3,17 @@ import type { BuildOptions } from 'esbuild';
 
 const useEsbuild = async (
   entrypoint: string,
-  outfile: string,
+  outputDir: string,
+  outputName: string,
   esbuildConfig: BuildOptions = {}
 ) => {
   const result = await build({
-    entryPoints: [entrypoint],
+    entryPoints: {
+      [outputName]: entrypoint,
+    },
+    outdir: outputDir,
     bundle: true,
     platform: 'node',
-    outfile,
     metafile: true,
     ...esbuildConfig,
   });

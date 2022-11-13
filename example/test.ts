@@ -1,5 +1,12 @@
-import { addTest } from './second';
+const test = {
+  second: () => import('./second'),
+  third: () => import('./third'),
+};
 
-export const handler = () => {
-  console.log(addTest(1, 3));
+type testKeysType = keyof typeof test;
+
+export const handler = async (payload: unknown = 'second') => {
+  if (typeof payload === 'string' && payload in test) {
+    test[payload as testKeysType]();
+  }
 };
