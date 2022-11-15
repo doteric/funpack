@@ -7,7 +7,7 @@ import generatePackageJson from './parts/generatePackageJson';
 import { error } from './utils/messages';
 import zipDirectory from './parts/zipDirectory';
 
-const OUTPUT_FILE_NAME = 'index.js';
+const OUTPUT_FILE_NAME = 'index';
 
 const buildFunction = async (
   name: string,
@@ -23,9 +23,12 @@ const buildFunction = async (
   const buildResult = await useEsbuild(
     entrypoint,
     functionOutputDir,
-    OUTPUT_FILE_NAME.replace('.js', ''),
+    OUTPUT_FILE_NAME,
     esbuildConfig
   );
+
+  // Get output file extension in case it was changed from the default (.js)
+  const outputExtension = esbuildConfig.outExtension?.['.js'] || '.js';
 
   // Generate package.json
   const metafile = buildResult.metafile;
@@ -33,13 +36,13 @@ const buildFunction = async (
     error('Missing metafile in esbuild result!');
     return false;
   }
-  const outputFilePath = join(outputDir, name, OUTPUT_FILE_NAME);
-  generatePackageJson(
-    metafile,
-    packageObject,
-    outputFilePath,
-    OUTPUT_FILE_NAME
+
+  const outputFilePath = join(
+    outputDir,
+    name,
+    `${OUTPUT_FILE_NAME}${outputExtension}`
   );
+  generatePackageJson(metafile, packageObject, outputFilePath);
 
   // Zip functions
   const shouldZip = packageObject.funpack.settings.zip;

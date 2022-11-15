@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { readFileSync } from 'fs';
 
 import funpack from '../index';
 
@@ -23,7 +24,7 @@ jest.mock('../utils/getPackageJsonObject', () =>
         },
       },
       functions: {
-        testfunc: './example/test.ts',
+        testfunc: './example/example.ts',
         second: './example/second.ts',
       },
     },
@@ -34,11 +35,16 @@ describe('funpack', () => {
   console.log = jest.fn();
   it('builds correctly', async () => {
     await funpack();
+    const firstPackageJson = JSON.parse(
+      readFileSync('example/dist/testfunc/package.json').toString()
+    );
+    expect(firstPackageJson).toMatchSnapshot();
+
     expect(console.log).toHaveBeenCalledTimes(2);
     expect(console.log).toBeCalledWith(
       join('example', 'dist', 'testfunc.zip'),
       '-',
-      21113,
+      21114,
       'total bytes'
     );
     expect(console.log).toBeCalledWith(

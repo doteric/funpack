@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { readFileSync } from 'fs';
 
 import funpack from '../index';
 
@@ -13,7 +14,7 @@ jest.mock('../utils/getPackageJsonObject', () =>
     funpack: {
       settings: {
         outputDir: 'example/dist-splitting',
-        packageFieldsToCopy: ['version', 'type'],
+        packageFieldsToCopy: ['version'],
         cleanupOutputDir: true,
         zip: true,
         esbuildConfigOverride: {
@@ -21,10 +22,13 @@ jest.mock('../utils/getPackageJsonObject', () =>
           target: 'node16',
           splitting: true,
           sourcemap: true,
+          outExtension: {
+            '.js': '.mjs',
+          },
         },
       },
       functions: {
-        firstSplit: './example/test.ts',
+        firstSplit: './example/example.ts',
         secondSplit: './example/second.ts',
       },
     },
@@ -35,6 +39,12 @@ describe('funpack', () => {
   console.log = jest.fn();
   it('builds correctly', async () => {
     await funpack();
+
+    const firstPackageJson = JSON.parse(
+      readFileSync('example/dist-splitting/firstSplit/package.json').toString()
+    );
+    expect(firstPackageJson).toMatchSnapshot();
+
     // TODO: Improve test case to check for files?
     expect(console.log).toHaveBeenCalledTimes(2);
     const logMock = console.log as jest.Mock;
@@ -47,6 +57,6 @@ describe('funpack', () => {
     expect(logMock.mock.calls[1][0]).toBe(
       join('example', 'dist-splitting', 'firstSplit.zip')
     );
-    expect(logMock.mock.calls[1][2]).toBeCloseTo(69275, -2);
+    expect(logMock.mock.calls[1][2]).toBeCloseTo(69327, -2);
   });
 });
