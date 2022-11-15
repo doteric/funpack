@@ -30,7 +30,7 @@ describe('getImportedPackages', () => {
             },
           ],
         },
-        'example/test.ts': {
+        'example/example.ts': {
           bytes: 130,
           imports: [
             {
@@ -48,13 +48,13 @@ describe('getImportedPackages', () => {
         'example/dist/testfunc.js': {
           imports: [],
           exports: [],
-          entryPoint: 'example/test.ts',
+          entryPoint: 'example/example.ts',
           inputs: {},
           bytes: 82693,
         },
       },
     };
-    const packages = getImportedPackages('example/test.ts', metafileMock);
+    const packages = getImportedPackages('example/example.ts', metafileMock);
     expect(packages).toEqual(['rimraf', '@scoped/test', 'test']);
   });
 
@@ -74,7 +74,7 @@ describe('getImportedPackages', () => {
             },
           ],
         },
-        'example/test.ts': {
+        'example/example.ts': {
           bytes: 130,
           imports: [
             {
@@ -92,13 +92,13 @@ describe('getImportedPackages', () => {
         'example/dist/testfunc.js': {
           imports: [],
           exports: [],
-          entryPoint: 'example/test.ts',
+          entryPoint: 'example/example.ts',
           inputs: {},
           bytes: 82693,
         },
       },
     };
-    const packages = getImportedPackages('example/test.ts', metafileMock);
+    const packages = getImportedPackages('example/example.ts', metafileMock);
     expect(packages).toEqual(['test']);
   });
 });

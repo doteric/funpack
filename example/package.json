@@ -4,7 +4,7 @@
       "zip": true
     },
     "functions": {
-      "test": "./example/test.ts"
+      "test": "./example/example.ts"
     }
   }
 }

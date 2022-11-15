@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`funpack builds correctly 1`] = `
+Object {
+  "dependencies": Object {
+    "rimraf": "3.0.2",
+  },
+  "main": "index.js",
+  "repository": Object {
+    "type": "git",
+    "url": "https://example.com/test/repo.git",
+  },
+  "version": "0.0.0-dev",
+}
+`;

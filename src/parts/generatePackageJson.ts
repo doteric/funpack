@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs';
-import { join, normalize } from 'path';
+import { join, normalize, basename } from 'path';
 import type { Metafile } from 'esbuild';
 
 import type { PackageObjectType } from '../types';
@@ -10,8 +10,7 @@ import { error } from '../utils/messages';
 const generatePackageJson = (
   metafile: Metafile,
   packageObject: PackageObjectType,
-  outputFilePath: string,
-  mainFilePath: string
+  outputFilePath: string
 ) => {
   // List used packages of output
   const output =
@@ -29,11 +28,18 @@ const generatePackageJson = (
   }
   const packages = getImportedPackages(output.entryPoint, metafile);
 
+  // Get main file path
+  const mainFile = basename(outputFilePath);
+  if (!mainFile) {
+    error('Could not retrieve file name from path:', outputFilePath);
+    return;
+  }
+
   // Prepare package.json
   const preparedPackageJson = prepareFunctionPackageJson({
     packages,
     packageObject,
-    mainPath: mainFilePath,
+    mainPath: mainFile,
   });
 
   // Write package.json

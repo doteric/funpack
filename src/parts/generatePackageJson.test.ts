@@ -40,12 +40,7 @@ describe('generatePackageJson', () => {
   };
 
   it('calls writeFileSync with correct parameters', () => {
-    generatePackageJson(
-      metafileMock,
-      packageObjectMock,
-      'test/path/index.js',
-      'index.js'
-    );
+    generatePackageJson(metafileMock, packageObjectMock, 'test/path/index.js');
     expect(writeFileSync).toBeCalledWith(
       join('test', 'path', 'package.json'),
       JSON.stringify(
@@ -63,8 +58,7 @@ describe('generatePackageJson', () => {
     generatePackageJson(
       metafileMock,
       packageObjectMock,
-      'test\\path\\index.js',
-      'index.js'
+      'test\\path\\index.js'
     );
     expect(writeFileSync).toBeCalledWith(
       join('test', 'path', 'package.json'),
