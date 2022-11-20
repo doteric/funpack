@@ -15,7 +15,8 @@ const getPackageNameFromPath = (path: string) => {
 
 const getImportedPackages = (
   inputPath: string,
-  metafile: Metafile
+  metafile: Metafile,
+  importChain: string[] = []
 ): string[] => {
   const input = metafile.inputs[inputPath];
   if (!input) {
@@ -29,7 +30,23 @@ const getImportedPackages = (
       const packageName = getPackageNameFromPath(inputImport.path);
       importedPackages.add(packageName);
     } else {
-      const packages = getImportedPackages(inputImport.path, metafile);
+      const updatedImportChain = [...importChain, inputImport.path];
+
+      // Check for circular dependency
+      if (importChain.includes(inputImport.path)) {
+        console.warn(
+          'Circular dependency detected! Chain:',
+          updatedImportChain
+        );
+        continue;
+      }
+
+      // Check imports of specified path
+      const packages = getImportedPackages(
+        inputImport.path,
+        metafile,
+        updatedImportChain
+      );
       for (const packageName of packages) {
         importedPackages.add(packageName);
       }
