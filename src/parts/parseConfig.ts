@@ -30,6 +30,7 @@ export type ConfigSchemaType = z.infer<typeof configSchema>;
 
 const parseConfig = (config: unknown) => {
   try {
+    // TODO: Use strict (https://github.com/colinhacks/zod#strict)
     return configSchema.parse(config);
   } catch (e) {
     if (e instanceof ZodError) {

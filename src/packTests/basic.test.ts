@@ -44,13 +44,13 @@ describe('funpack', () => {
     expect(console.log).toBeCalledWith(
       join('example', 'dist', 'testfunc.zip'),
       '-',
-      21114,
+      21199,
       'total bytes'
     );
     expect(console.log).toBeCalledWith(
       join('example', 'dist', 'second.zip'),
       '-',
-      20815,
+      20876,
       'total bytes'
     );
   });

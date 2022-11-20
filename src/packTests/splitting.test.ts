@@ -52,11 +52,11 @@ describe('funpack', () => {
     expect(logMock.mock.calls[0][0]).toBe(
       join('example', 'dist-splitting', 'secondSplit.zip')
     );
-    expect(logMock.mock.calls[0][2]).toBeCloseTo(67352, -2);
+    expect(logMock.mock.calls[0][2]).toBeCloseTo(67547, -2);
 
     expect(logMock.mock.calls[1][0]).toBe(
       join('example', 'dist-splitting', 'firstSplit.zip')
     );
-    expect(logMock.mock.calls[1][2]).toBeCloseTo(69327, -2);
+    expect(logMock.mock.calls[1][2]).toBeCloseTo(69491, -2);
   });
 });

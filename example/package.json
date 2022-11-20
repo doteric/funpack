@@ -8,7 +8,10 @@
       "zip": true
     },
     "functions": {
-      "test": "./example/example.ts"
+      "test": "./example.ts"
     }
+  },
+  "devDependencies": {
+    "funpack": "file:.."
   }
 }
