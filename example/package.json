@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "prepackage": "tsc --noEmit",
+    "package": "funpack"
+  },
   "funpack": {
     "settings": {
       "zip": true

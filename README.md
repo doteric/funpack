@@ -21,7 +21,7 @@ npm install --save-dev funpack
 yarn add -D funpack
 ```
 
-2. Add `funpack` to your package.json like so:
+2. Add `funpack` to your package.json, for example like so:
 
 ```json
 // package.json
@@ -36,6 +36,26 @@ yarn add -D funpack
   }
 }
 ```
+
+Settings are described under the [Settings](#settings) section.
+
+3. Run the `funpack` cli.
+   For example:
+
+```json
+{
+  ...
+  "scripts": {
+    "prepackage": "tsc --noEmit",
+    "package": "funpack"
+  },
+  ...
+}
+```
+
+The `funpack` cli accepts `--packageJsonPath` (defaults to directory of script execution so your main `package.json`) that accepts the path of the `package.json` that contains the funpack config.
+
+### Settings
 
 Each option inside `settings` is optional. Below you can view what exactly is needed in the funpack object as well as which settings are available.
 
