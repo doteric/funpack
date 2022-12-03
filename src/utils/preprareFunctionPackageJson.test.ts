@@ -2,7 +2,7 @@ import parseConfig from '../parts/parseConfig';
 import prepareFunctionPackageJson from './prepareFunctionPackageJson';
 
 describe('prepareFunctionPackageJson', () => {
-  it('returns ...', () => {
+  it('returns correct package.json for function', () => {
     const packageObjectMock = {
       funpack: parseConfig({
         functions: {},
@@ -10,7 +10,10 @@ describe('prepareFunctionPackageJson', () => {
       }),
     };
     const packageObject = prepareFunctionPackageJson({
-      packages: ['esbuild', 'commander'],
+      dependencies: {
+        esbuild: '0.15.13',
+        commander: '9.3.0',
+      },
       packageObject: packageObjectMock,
       mainPath: './index.js',
     });

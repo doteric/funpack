@@ -1,0 +1,27 @@
+{
+  "type": "module",
+  "scripts": {
+    "package": "funpack"
+  },
+  "funpack": {
+    "settings": {
+      "packageFieldsToCopy": [
+        "version",
+        "type"
+      ],
+      "esbuildConfigOverride": {
+        "format": "esm",
+        "target": "node16",
+        "splitting": true
+      },
+      "zip": true
+    },
+    "functions": {
+      "exampleOne": "./src/exampleOne/main.ts",
+      "exampleTwo": "./src/exampleTwo/main.ts"
+    }
+  },
+  "devDependencies": {
+    "funpack": "file:../.."
+  }
+}

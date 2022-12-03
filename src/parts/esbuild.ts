@@ -15,6 +15,7 @@ const useEsbuild = async (
     bundle: true,
     platform: 'node',
     metafile: true,
+    absWorkingDir: process.cwd(),
     ...esbuildConfig,
   });
   return result;
