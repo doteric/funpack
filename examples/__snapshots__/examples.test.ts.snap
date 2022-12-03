@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`examples "basic-multi" packages correctly 1`] = `
+Object {
+  "dependencies": Object {},
+  "main": "index.js",
+  "type": "module",
+}
+`;
+
+exports[`examples "basic-multi" packages correctly 2`] = `
+Object {
+  "dependencies": Object {},
+  "main": "index.js",
+  "type": "module",
+}
+`;
+
+exports[`examples "basic-single" packages correctly 1`] = `
+Object {
+  "dependencies": Object {},
+  "main": "index.js",
+  "type": "module",
+}
+`;
+
+exports[`examples "circular-dependency" packages correctly 1`] = `
+Object {
+  "dependencies": Object {},
+  "main": "index.js",
+  "type": "module",
+}
+`;
+
+exports[`examples "mjs-extension" packages correctly 1`] = `
+Object {
+  "dependencies": Object {},
+  "main": "index.mjs",
+}
+`;
+
+exports[`examples "module-splitting" packages correctly 1`] = `
+Object {
+  "dependencies": Object {},
+  "main": "index.js",
+  "type": "module",
+}
+`;
+
+exports[`examples "module-splitting" packages correctly 2`] = `
+Object {
+  "dependencies": Object {
+    "rimraf": "3.0.2",
+  },
+  "main": "index.js",
+  "type": "module",
+}
+`;

@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "scripts": {
+    "prepackage": "tsc --noEmit",
+    "package": "funpack"
+  },
+  "funpack": {
+    "settings": {
+      "packageFieldsToCopy": [
+        "version",
+        "type"
+      ],
+      "zip": true
+    },
+    "functions": {
+      "main": "./src/main.ts"
+    }
+  },
+  "devDependencies": {
+    "funpack": "file:../.."
+  }
+}

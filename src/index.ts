@@ -1,10 +1,24 @@
 import { rmSync, existsSync } from 'fs';
+import { chdir } from 'process';
 
 import validateConfig from './parts/parseConfig';
 import getPackageJsonObject from './utils/getPackageJsonObject';
 import buildFunction from './bulidFunction';
 
-const funpack = async (packageJsonPath?: string) => {
+interface FunpackParamsType {
+  packageJsonPath?: string;
+  workingDirectory?: string;
+}
+
+const funpack = async ({
+  packageJsonPath,
+  workingDirectory,
+}: FunpackParamsType = {}) => {
+  // Change working directory if set
+  if (workingDirectory) {
+    chdir(workingDirectory);
+  }
+
   // Get package.json content
   const packageObject = getPackageJsonObject(packageJsonPath);
 

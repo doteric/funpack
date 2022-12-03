@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    "package": "funpack"
+  },
+  "funpack": {
+    "settings": {
+      "packageFieldsToCopy": [
+        "version"
+      ],
+      "esbuildConfigOverride": {
+        "format": "esm",
+        "target": "node16",
+        "sourcemap": true,
+        "outExtension": {
+          ".js": ".mjs"
+        }
+      },
+      "zip": true
+    },
+    "functions": {
+      "example": "./main.mjs"
+    }
+  },
+  "devDependencies": {
+    "funpack": "file:../.."
+  }
+}

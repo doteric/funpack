@@ -26,7 +26,7 @@ const generatePackageJson = (
     error('Entrypoint of output not defined!');
     return;
   }
-  const packages = getImportedPackages(output.entryPoint, metafile);
+  const dependencies = getImportedPackages(output.entryPoint, metafile);
 
   // Get main file path
   const mainFile = basename(outputFilePath);
@@ -37,7 +37,7 @@ const generatePackageJson = (
 
   // Prepare package.json
   const preparedPackageJson = prepareFunctionPackageJson({
-    packages,
+    dependencies,
     packageObject,
     mainPath: mainFile,
   });
