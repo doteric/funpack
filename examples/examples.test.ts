@@ -1,5 +1,5 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import funpack from '../src';
 
@@ -23,7 +23,7 @@ const directories = [
     dir: 'module-splitting',
     expectedOutput: [
       { name: 'exampleTwo', zip: { approxSize: 432 } },
-      { name: 'exampleOne', zip: { approxSize: 21597 } },
+      { name: 'exampleOne', zip: { approxSize: 21868 } },
     ],
   },
   {

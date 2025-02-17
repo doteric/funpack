@@ -1,5 +1,5 @@
-import { rmSync, existsSync } from 'fs';
-import { chdir } from 'process';
+import { rmSync, existsSync } from 'node:fs';
+import { chdir } from 'node:process';
 
 import validateConfig from './parts/parseConfig';
 import getPackageJsonObject from './utils/getPackageJsonObject';

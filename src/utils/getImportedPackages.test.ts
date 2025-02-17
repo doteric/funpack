@@ -1,16 +1,38 @@
-import { join } from 'path';
+import { join, resolve } from 'node:path';
 
-jest.mock('fs', () => ({
+jest.mock('node:fs', () => ({
   readFileSync: jest.fn((packageJsonPath: string) => {
-    const packageJsonToVersionMap: Record<string, string> = {
-      [join('node_modules', '@scoped', 'test', 'package.json')]: '1.2.3',
-      [join('node_modules', 'test', 'package.json')]: '3.2.1',
-      [join('node_modules', 'rimraf', 'package.json')]: '3.0.0',
-      [join('..', 'node_modules', 'test', 'package.json')]: '2.1.3',
+    const packageJsonMap: Record<string, { name: string; version: string }> = {
+      [join('node_modules', '@scoped', 'test', 'package.json')]: {
+        name: '@scoped/test',
+        version: '1.2.3',
+      },
+      [join('node_modules', 'test', 'package.json')]: {
+        name: 'test',
+        version: '3.2.1',
+      },
+      [join('node_modules', 'rimraf', 'package.json')]: {
+        name: 'rimraf',
+        version: '3.0.0',
+      },
+      [join('..', 'node_modules', 'test', 'package.json')]: {
+        name: 'test',
+        version: '2.1.3',
+      },
+      [resolve(join('node_modules', 'rimraf', 'package.json'))]: {
+        name: 'rimraf',
+        version: '4.4.4',
+      },
+      [resolve(join('node_modules', '@types', 'archiver', 'package.json'))]: {
+        name: '@types/archiver',
+        version: '1.2.3',
+      },
+      [resolve(join('node_modules', 'archiver', 'package.json'))]: {
+        name: 'archiver',
+        version: '3.2.1',
+      },
     };
-    return JSON.stringify({
-      version: packageJsonToVersionMap[packageJsonPath],
-    });
+    return JSON.stringify(packageJsonMap[packageJsonPath]);
   }),
 }));
 
@@ -25,7 +47,7 @@ describe('getImportedPackages', () => {
         'node_modules/glob/glob.js': { bytes: 19445, imports: [] },
         'node_modules/test/test.js': { bytes: 19445, imports: [] },
         'node_modules/rimraf/rimraf.js': {
-          bytes: 8866,
+          bytes: 866,
           imports: [
             {
               path: 'node_modules/glob/glob.js',
@@ -151,5 +173,69 @@ describe('getImportedPackages', () => {
     };
     const packages = getImportedPackages('example/example.ts', metafileMock);
     expect(packages).toEqual({ test: '2.1.3' });
+  });
+
+  it('returns correct package list for new esbuild external true', () => {
+    const metafileMock: Metafile = {
+      inputs: {
+        'node_modules/@scoped/test/main.js': { bytes: 19445, imports: [] },
+        'node_modules/glob/glob.js': { bytes: 19445, imports: [] },
+        'node_modules/test/test.js': { bytes: 19445, imports: [] },
+        'node_modules/rimraf/rimraf.js': {
+          bytes: 866,
+          imports: [
+            {
+              path: 'glob',
+              kind: 'import-statement',
+              external: true,
+            },
+          ],
+        },
+        'example/second.ts': {
+          bytes: 158,
+          imports: [
+            {
+              path: 'rimraf',
+              kind: 'import-statement',
+              external: true,
+            },
+            {
+              path: '@types/archiver',
+              kind: 'import-statement',
+              external: true,
+            },
+          ],
+        },
+        'example/example.ts': {
+          bytes: 130,
+          imports: [
+            {
+              path: 'example/second.ts',
+              kind: 'import-statement',
+            },
+            {
+              path: 'archiver',
+              kind: 'import-statement',
+              external: true,
+            },
+          ],
+        },
+      },
+      outputs: {
+        'example/dist/testfunc.js': {
+          imports: [],
+          exports: [],
+          entryPoint: 'example/example.ts',
+          inputs: {},
+          bytes: 82693,
+        },
+      },
+    };
+    const packages = getImportedPackages('example/example.ts', metafileMock);
+    expect(packages).toEqual({
+      '@types/archiver': '1.2.3',
+      rimraf: '4.4.4',
+      archiver: '3.2.1',
+    });
   });
 });
