@@ -1,0 +1,26 @@
+name: Publish beta version of Package to npmjs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_publish_beta:
+    if: github.ref_name != 'master' # Ensure it does not run on default branches
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    environment: npm
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: |
+          SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
+          npm version 0.0.0-${{ github.ref_slug }}-$SHORT_SHA --no-git-tag-version
+          npm ci
+          npm run compile
+          npm publish --tag beta --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
