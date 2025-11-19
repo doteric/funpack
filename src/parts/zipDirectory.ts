@@ -1,4 +1,4 @@
-import { createWriteStream, existsSync, rmSync } from 'fs';
+import { createWriteStream, existsSync, rmSync } from 'node:fs';
 import archiver from 'archiver';
 
 const zipDirectory = async (dirPath: string, removeDir = false) => {

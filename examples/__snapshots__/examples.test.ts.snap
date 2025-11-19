@@ -18,7 +18,10 @@ Object {
 
 exports[`examples "basic-single" packages correctly 1`] = `
 Object {
-  "dependencies": Object {},
+  "dependencies": Object {
+    "@typescript-eslint/utils": "5.27.1",
+    "resolve-package-path": "4.0.3",
+  },
   "main": "index.js",
   "type": "module",
 }

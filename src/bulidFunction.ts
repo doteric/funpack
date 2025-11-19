@@ -1,5 +1,5 @@
 import type { BuildOptions } from 'esbuild';
-import { join } from 'path';
+import { join } from 'node:path';
 
 import type { PackageObjectType } from './types';
 import useEsbuild from './parts/esbuild';

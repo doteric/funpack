@@ -16,6 +16,9 @@
       "main": "./src/main.ts"
     }
   },
+  "dependencies": {
+    "resolve-package-path": "^4.0.3"
+  },
   "devDependencies": {
     "funpack": "file:../.."
   }
