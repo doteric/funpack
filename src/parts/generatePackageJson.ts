@@ -1,5 +1,5 @@
-import { writeFileSync } from 'fs';
-import { join, normalize, basename } from 'path';
+import { writeFileSync } from 'node:fs';
+import { join, normalize, basename } from 'node:path';
 import type { Metafile } from 'esbuild';
 
 import type { PackageObjectType } from '../types';

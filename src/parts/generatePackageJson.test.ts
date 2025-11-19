@@ -1,10 +1,10 @@
-jest.mock('fs', () => ({
+jest.mock('node:fs', () => ({
   writeFileSync: jest.fn(),
 }));
 
 import type { Metafile } from 'esbuild';
-import { writeFileSync } from 'fs';
-import { join } from 'path';
+import { writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import generatePackageJson from './generatePackageJson';
 import parseConfig from './parseConfig';
