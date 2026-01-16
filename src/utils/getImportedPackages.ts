@@ -65,7 +65,16 @@ const getImportedPackages = (
       }
     */
     // TODO: Extract to separate file and add full tests for various scenarios
-    if (inputImport.external === true) {
+
+    // Node Package decision based on https://nodejs.org/api/esm.html#terminology
+    // Check if it's a relative specifier (./ or ../) or absolute specifier (/ or file://)
+    const isRelativeOrAbsoluteSpecifier =
+      inputImport.path.startsWith('./') ||
+      inputImport.path.startsWith('../') ||
+      inputImport.path.startsWith('/') ||
+      inputImport.path.startsWith('file://');
+
+    if (inputImport.external === true && !isRelativeOrAbsoluteSpecifier) {
       const packageName = inputImport.path.startsWith('@')
         ? inputImport.path.split('/').slice(0, 2).join('/')
         : inputImport.path.split('/')[0];
