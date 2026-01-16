@@ -238,4 +238,43 @@ describe('getImportedPackages', () => {
       archiver: '3.2.1',
     });
   });
+
+  it('skips relative specifiers marked as external', () => {
+    const metafileMock: Metafile = {
+      inputs: {
+        '../../../common/slack/parseMiddleware.js': {
+          bytes: 1000,
+          imports: [],
+        },
+        'example/example.ts': {
+          bytes: 130,
+          imports: [
+            {
+              path: '../../../common/slack/parseMiddleware.js',
+              kind: 'import-statement',
+              external: true,
+            },
+            {
+              path: 'archiver',
+              kind: 'import-statement',
+              external: true,
+            },
+          ],
+        },
+      },
+      outputs: {
+        'example/dist/testfunc.js': {
+          imports: [],
+          exports: [],
+          entryPoint: 'example/example.ts',
+          inputs: {},
+          bytes: 82693,
+        },
+      },
+    };
+    const packages = getImportedPackages('example/example.ts', metafileMock);
+    expect(packages).toEqual({
+      archiver: '3.2.1',
+    });
+  });
 });
