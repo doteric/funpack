@@ -24,3 +24,4 @@ jobs:
           npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+# TODO: Consider using NPM trusted publisher when multi file support added
