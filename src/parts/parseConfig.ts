@@ -4,7 +4,7 @@ const configSchema = z.object(
   {
     // TODO: Add settings per function
     functions: z.record(z.string(), z.string(), {
-      required_error: 'Make sure you are declaring the functions!',
+      error: 'Make sure you are declaring the functions!',
     }),
     settings: z.object({
       // Esbuild configuration that is used for additional build settings
@@ -23,7 +23,7 @@ const configSchema = z.object(
       customPackageFields: z.record(z.string(), z.any()).default({}),
     }),
   },
-  { required_error: 'Missing funpack config inside package.json!' }
+  { error: 'Missing funpack config inside package.json!' }
 );
 
 export type ConfigSchemaType = z.infer<typeof configSchema>;

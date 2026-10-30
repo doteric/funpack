@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "Node16",
     "esModuleInterop": true,
     "target": "es2019",
-    "moduleResolution": "node",
+    "moduleResolution": "Node16",
+    "isolatedModules": true,
     "sourceMap": true,
+    "rootDir": "./src",
     "outDir": "dist",
-    "baseUrl": ".",
     "lib": ["es2021"],
     "strict": true,
     "resolveJsonModule": true,

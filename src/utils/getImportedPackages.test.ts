@@ -1,6 +1,7 @@
 import { join, resolve } from 'node:path';
 
 jest.mock('node:fs', () => ({
+  ...jest.requireActual<typeof import('node:fs')>('node:fs'),
   readFileSync: jest.fn((packageJsonPath: string) => {
     const packageJsonMap: Record<string, { name: string; version: string }> = {
       [join('node_modules', '@scoped', 'test', 'package.json')]: {

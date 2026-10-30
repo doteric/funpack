@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import { join } from 'node:path';
 
 // Check if importing with package paths works correctly
-import { AST_NODE_TYPES } from '@typescript-eslint/utils/dist/ts-estree';
+import { AST_NODE_TYPES } from '@typescript-eslint/types';
 import resolvePackagePath from 'resolve-package-path';
 
 export const handler = (event: unknown) => {

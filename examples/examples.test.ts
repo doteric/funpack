@@ -13,7 +13,7 @@ const directories = [
   },
   {
     dir: 'basic-single',
-    expectedOutput: [{ name: 'main', zip: { approxSize: 7400 } }],
+    expectedOutput: [{ name: 'main', zip: { approxSize: 7450 } }],
   },
   {
     dir: 'mjs-extension',
@@ -23,7 +23,7 @@ const directories = [
     dir: 'module-splitting',
     expectedOutput: [
       { name: 'exampleTwo', zip: { approxSize: 432 } },
-      { name: 'exampleOne', zip: { approxSize: 21868 } },
+      { name: 'exampleOne', zip: { approxSize: 40805 } },
     ],
   },
   {
